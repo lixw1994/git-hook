@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# from https://github.com/lixw1994/git-hook
-
 set -e
 
 _green() {
@@ -40,20 +38,19 @@ main() {
     return 1;
   fi
 
-  if [ -f .git/hooks/pre-commit ]; then
-    mv .git/hooks/pre-commit .git/hooks/pre-commit.bak;
-  fi
-
   if [ -f .git/hooks/commit-msg ]; then
     mv .git/hooks/commit-msg .git/hooks/commit-msg.bak;
   fi
-
   curl https://raw.githubusercontent.com/lixw1994/git-hook/master/git-commit-msg.sh -o .git/hooks/commit-msg
-  curl https://raw.githubusercontent.com/lixw1994/git-hook/master/golang-pre-commit.sh -o .git/hooks/pre-commit
+  chmod +x .git/hooks/commit-msg 
+  _green "commit-msg hook Install Success!"
 
-  chmod +x .git/hooks/commit-msg .git/hooks/pre-commit
-
-  _green "Golang pre-commit hook & commit-msg hook Install Success!"
+#   if [ -f .git/hooks/pre-commit ]; then
+#     mv .git/hooks/pre-commit .git/hooks/pre-commit.bak;
+#   fi
+#   curl https://raw.githubusercontent.com/lixw1994/git-hook/master/golang-pre-commit.sh -o .git/hooks/pre-commit
+#   chmod +x .git/hooks/pre-commit
+#   _green "pre-commit hook Install Success!"
 }
 
 main "$@"
