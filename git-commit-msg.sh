@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # ignore merge request
-MERGE_MSG=$(grep -E '^Merge branch*' "$1")
+MERGE_MSG=$(grep -E '^Merge *' "$1")
 
 if [ "$MERGE_MSG" != "" ]; then
     exit 0
